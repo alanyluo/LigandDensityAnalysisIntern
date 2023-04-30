@@ -1,0 +1,27 @@
+#!/usr/bin/bash
+# Determine how the proximity of metal ions impacts observed absolute significant regional discrepancy.
+# Specifically:
+# 1. Get the regional discrepancy dataset.
+# 2. Get the first, second, and third datasets. Each dataset has two datasets (one for within, one for beyond), making for a total of 3*2 = 6 datasets.
+# 3. Get the spreadsheets for these datasets, from which the scatterplots and histograms can then be retrieved via a program like Microsoft Excel.
+
+# Get the regional discrepancy dataset.
+# Include the skip option if you are running this again. You would do so by adding "--skip" at the end of this command.
+# Add a time-out if the execution is taking too long. You would do so by adding "--time-out=x" after the "--single-mode" options, where x is the desired time-out amount.
+pdb_eda multiple results/standalone_01-04-22.txt results/standalone_01-04-22 --single-mode="difference --residue --type=ATP --include-pdbid" 1> results/discrep.out 2> results/discrep.err
+
+# Get the first, second, and third datasets.
+python3 metalAnalysis/code/getMetalDatasets.py results/standalone_01-04-22.txt results/standalone_01-04-22  metalAnalysis/results/firstWithin.txt metalAnalysis/results/firstBeyond.txt 3.5 MG 1> metalAnalysis/results/metal.out 2> metalAnalysis/results/metal.err
+
+python3 metalAnalysis/code/getMetalDatasets.py results/standalone_01-04-22.txt results/standalone_01-04-22 metalAnalysis/results/secondWithin.txt metalAnalysis/results/secondBeyond.txt 3.5 ZN,MG,CA,FE,NA,MN 1> metalAnalysis/results/metal.out 2> metalAnalysis/results/metal.err
+
+python3 metalAnalysis/code/getMetalDatasets.py results/standalone_01-04-22.txt results/standalone_01-04-22 metalAnalysis/results/thirdWithin.txt metalAnalysis/results/thirdBeyond.txt 3.5 ZN,MG,CA,FE,NA,MN,K,CU,NI,CO,CD,HG,PT,MO,AL,V,BA,SR,RU,CS,W,YB,AU,Y,LI,PB,GD,TL,RB,SM,IR,PR,RH,EU,PD,AG,OS,LU,HO,TB,CR,GA,LA,SB,CE,ER,IN,BI,DY,BE,ZR,SN,HF,TA,RE,PA,U 1> metalAnalysis/results/metal.out 2> metalAnalysis/results/metal.err
+
+# Get the spreadsheets, from which the desired graphs can then be had.
+python3 metalAnalysis/code/getMetalResults.py metalAnalysis/results/firstWithin.txt metalAnalysis/results/firstBeyond.txt first
+
+python3 metalAnalysis/code/getMetalResults.py metalAnalysis/results/secondWithin.txt metalAnalysis/results/secondBeyond.txt second
+
+python3 metalAnalysis/code/getMetalResults.py metalAnalysis/results/thirdWithin.txt metalAnalysis/results/thirdBeyond.txt third
+
+echo "Finished metalAnalysis!"

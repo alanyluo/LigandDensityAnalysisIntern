@@ -1,0 +1,29 @@
+#!/usr/bin/bash
+# Determine how the proximity of crystal contacts impacts observed absolute significant regional discrepancy.
+# Specifically:
+# 1. Get the regional discrepancy dataset.
+# 2. Get the within_3_5 and within_10 datasets using pdb_eda.
+# 3. Get the needed metrics from these datasets, and between_3_5_10 and beyond_10 datasets.
+# 4. Get the spreadsheets for these datasets, from which the scatterplots and histograms can then be retrieved via a program like Microsoft Excel.
+
+# Get the regional discrepancy dataset.
+# Include the skip option if you are running this again. You would do so by adding "--skip" at the end of this command.
+# Add a time-out if the execution is taking too long. You would do so by adding "--time-out=x" after the "--single-mode" options, where x is the desired time-out amount.
+pdb_eda multiple results/standalone_01-04-22.txt results/standalone_01-04-22 --single-mode="difference --residue --type=ATP --include-pdbid" 1> results/discrep.out 2> results/discrep.err
+
+# For any of the following two commands, add the --skip option after --safe if you've run the command before and already got some PDB entries.
+# The following two commands should both be run on an HPC machine, e.g. a KyRIC cluster, as there is a significant amount of PDB entries to run on.
+# Get within_3_5 dataset using pdb_eda.
+# The output and error messages are also recorded to see if anything goes wrong.
+pdb_eda multiple results/standalone_01-04-22.txt results/within_3_5_01-04-22 --contacts-mode="--distance=3.5 --include-pdbid" --time-out=3600 --safe 1> results/within_3_5_01-04-22.out 2> results/within_3_5_01-04-22.err
+
+# Get within_10 dataset using pdb_eda.
+pdb_eda multiple results/standalone_01-04-22.txt results/within_10_01-04-22 --contacts-mode="--distance=10 --include-pdbid" --time-out=3600 --safe 1> results/within_10_01-04-22.out 2> results/within_10_01-04-22.err
+
+# Get the needed metrics from these datasets, and between_3_5_10 and beyond_10 datasets.
+python3 code/getCrsDatasets.py results/standalone_01-04-22 results/within_3_5_01-04-22 results/crsResults/within_10_01-04-22 results/beyond10.txt results/between.txt results/within35.txt results/within10.txt 1> results/crsData.out 2> results/crsData.err
+
+# Get the spreadsheets for these datasets, from which the scatterplots and histograms can then be retrieved via a program like Microsoft Excel.
+python3 code/getCrsResults.py results/within35.txt results/between.txt results/within10.txt results/beyond10.txt 1> results/crsSheets.out 2> results/crsSheets.err
+
+echo "Finished crsContactAnalysis!"

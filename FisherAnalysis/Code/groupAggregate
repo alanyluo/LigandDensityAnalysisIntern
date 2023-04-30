@@ -1,0 +1,116 @@
+#!/usr/bin/bash
+
+########## Aggregate all the needed datasets. ##########
+
+echo "agg hasMetalsAll"
+
+time python3 fisherAnalysis/code/getGroups.py fisherAnalysis/results/aggAttempt3/hasMetalsADPAll.txt,fisherAnalysis/results/aggAttempt3/hasMetalsATPAll.txt,fisherAnalysis/results/aggAttempt3/hasMetalsGDPAll.txt,fisherAnalysis/results/aggAttempt3/hasMetalsGTPAll.txt,fisherAnalysis/results/aggAttempt3/hasMetalsFADAll.txt,fisherAnalysis/results/aggAttempt3/hasMetalsNADAll.txt 1> fisherAnalysis/results/aggGroup/hasMetalsAll.out 2> fisherAnalysis/results/aggGroup/hasMetalsAll.err
+
+
+echo "agg hasMetalsTopSix"
+
+time python3 fisherAnalysis/code/getGroups.py fisherAnalysis/results/aggAttempt3/hasMetalsADPTopSix.txt,fisherAnalysis/results/aggAttempt3/hasMetalsATPTopSix.txt,fisherAnalysis/results/aggAttempt3/hasMetalsGDPTopSix.txt,fisherAnalysis/results/aggAttempt3/hasMetalsGTPTopSix.txt,fisherAnalysis/results/aggAttempt3/hasMetalsFADTopSix.txt,fisherAnalysis/results/aggAttempt3/hasMetalsNADTopSix.txt 1> fisherAnalysis/results/aggGroup/hasMetalsTopSix.out 2> fisherAnalysis/results/aggGroup/hasMetalsTopSix.err
+
+
+echo "agg all"
+
+# all pos
+
+time python3 fisherAnalysis/code/getGroups.py fisherAnalysis/results/group2/adpAllPos.txt,fisherAnalysis/results/group2/atpAllPos.txt,fisherAnalysis/results/group2/gdpAllPos.txt,fisherAnalysis/results/group2/gtpAllPos.txt,fisherAnalysis/results/group2/fadAllPos.txt,fisherAnalysis/results/group2/nadAllPos.txt 1> fisherAnalysis/results/aggGroup/allPos.out 2> fisherAnalysis/results/aggGroup/allPos.err
+
+# all neg
+
+time python3 fisherAnalysis/code/getGroups.py fisherAnalysis/results/group2/adpAllNeg.txt,fisherAnalysis/results/group2/atpAllNeg.txt,fisherAnalysis/results/group2/gdpAllNeg.txt,fisherAnalysis/results/group2/gtpAllNeg.txt,fisherAnalysis/results/group2/fadAllNeg.txt,fisherAnalysis/results/group2/nadAllNeg.txt 1> fisherAnalysis/results/aggGroup/allNeg.out 2> fisherAnalysis/results/aggGroup/allNeg.err
+
+# all neu
+
+time python3 fisherAnalysis/code/getGroups.py fisherAnalysis/results/group2/adpAllNeu.txt,fisherAnalysis/results/group2/atpAllNeu.txt,fisherAnalysis/results/group2/gdpAllNeu.txt,fisherAnalysis/results/group2/gtpAllNeu.txt,fisherAnalysis/results/group2/fadAllNeu.txt,fisherAnalysis/results/group2/nadAllNeu.txt 1> fisherAnalysis/results/aggGroup/allNeu.out 2> fisherAnalysis/results/aggGroup/allNeu.err
+
+
+
+
+echo "agg topsix"
+
+# TopSix pos
+
+time python3 fisherAnalysis/code/getGroups.py fisherAnalysis/results/group2/adpTopSixPos.txt,fisherAnalysis/results/group2/atpTopSixPos.txt,fisherAnalysis/results/group2/gdpTopSixPos.txt,fisherAnalysis/results/group2/gtpTopSixPos.txt,fisherAnalysis/results/group2/fadTopSixPos.txt,fisherAnalysis/results/group2/nadTopSixPos.txt 1> fisherAnalysis/results/aggGroup/TopSixPos.out 2> fisherAnalysis/results/aggGroup/TopSixPos.err
+
+# TopSix neg
+
+time python3 fisherAnalysis/code/getGroups.py fisherAnalysis/results/group2/adpTopSixNeg.txt,fisherAnalysis/results/group2/atpTopSixNeg.txt,fisherAnalysis/results/group2/gdpTopSixNeg.txt,fisherAnalysis/results/group2/gtpTopSixNeg.txt,fisherAnalysis/results/group2/fadTopSixNeg.txt,fisherAnalysis/results/group2/nadTopSixNeg.txt 1> fisherAnalysis/results/aggGroup/TopSixNeg.out 2> fisherAnalysis/results/aggGroup/TopSixNeg.err
+
+# TopSix neu
+
+time python3 fisherAnalysis/code/getGroups.py fisherAnalysis/results/group2/adpTopSixNeu.txt,fisherAnalysis/results/group2/atpTopSixNeu.txt,fisherAnalysis/results/group2/gdpTopSixNeu.txt,fisherAnalysis/results/group2/gtpTopSixNeu.txt,fisherAnalysis/results/group2/fadTopSixNeu.txt,fisherAnalysis/results/group2/nadTopSixNeu.txt 1> fisherAnalysis/results/aggGroup/TopSixNeu.out 2> fisherAnalysis/results/aggGroup/TopSixNeu.err
+
+
+
+
+
+
+
+
+
+
+
+
+
+########## Get the results files for these aggregate datasets. ##########
+
+# hasMetalsAll
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggGroup/hasMetalsAll.out fisherAnalysis/results/aggGroup/hasMetalsAll.xlsx m 1> fisherAnalysis/results/aggGroup/hasMetalsAllResult.out 2> fisherAnalysis/results/aggGroup/hasMetalsAllResult.err
+
+# hasMetalsTopSix
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggGroup/hasMetalsTopSix.out fisherAnalysis/results/aggGroup/hasMetalsTopSix.xlsx m 1> fisherAnalysis/results/aggGroup/hasMetalsTopSixResult.out 2> fisherAnalysis/results/aggGroup/hasMetalsTopSixResult.err
+
+
+# all
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggGroup/allPos.out fisherAnalysis/results/aggGroup/allPos.xlsx m 1> fisherAnalysis/results/aggGroup/allPosResult.out 2> fisherAnalysis/results/aggGroup/allPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggGroup/allNeg.out fisherAnalysis/results/aggGroup/allNeg.xlsx m 1> fisherAnalysis/results/aggGroup/allNegResult.out 2> fisherAnalysis/results/aggGroup/allNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggGroup/allNeu.out fisherAnalysis/results/aggGroup/allNeu.xlsx m 1> fisherAnalysis/results/aggGroup/allNeuResult.out 2> fisherAnalysis/results/aggGroup/allNeuResult.err
+
+
+# topsix
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggGroup/TopSixPos.out fisherAnalysis/results/aggGroup/TopSixPos.xlsx m 1> fisherAnalysis/results/aggGroup/TopSixPosResult.out 2> fisherAnalysis/results/aggGroup/TopSixPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggGroup/TopSixNeg.out fisherAnalysis/results/aggGroup/TopSixNeg.xlsx m 1> fisherAnalysis/results/aggGroup/TopSixNegResult.out 2> fisherAnalysis/results/aggGroup/TopSixNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggGroup/TopSixNeu.out fisherAnalysis/results/aggGroup/TopSixNeu.xlsx m 1> fisherAnalysis/results/aggGroup/TopSixNeuResult.out 2> fisherAnalysis/results/aggGroup/TopSixNeuResult.err
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+########## Get the Fisher's test data for these result files. ##########
+
+echo "all fisher"
+# all pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggGroup/hasMetalsAll.xlsx fisherAnalysis/results/aggGroup/allPos.xlsx 3.5 1> fisherAnalysis/results/aggGroup/statsAllPos.out 2> fisherAnalysis/results/aggGroup/statsAllPos.err
+
+# all neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggGroup/hasMetalsAll.xlsx fisherAnalysis/results/aggGroup/allNeg.xlsx 3.5 1> fisherAnalysis/results/aggGroup/statsAllNeg.out 2> fisherAnalysis/results/aggGroup/statsAllNeg.err
+
+# all neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggGroup/hasMetalsAll.xlsx fisherAnalysis/results/aggGroup/allNeu.xlsx 3.5 1> fisherAnalysis/results/aggGroup/statsAllNeu.out 2> fisherAnalysis/results/aggGroup/statsAllNeu.err
+
+
+
+echo "TopSix fisher"
+# TopSix pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggGroup/hasMetalsTopSix.xlsx fisherAnalysis/results/aggGroup/TopSixPos.xlsx 3.5 1> fisherAnalysis/results/aggGroup/statsTopSixPos.out 2> fisherAnalysis/results/aggGroup/statsTopSixPos.err
+
+# TopSix neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggGroup/hasMetalsTopSix.xlsx fisherAnalysis/results/aggGroup/TopSixNeg.xlsx 3.5 1> fisherAnalysis/results/aggGroup/statsTopSixNeg.out 2> fisherAnalysis/results/aggGroup/statsTopSixNeg.err
+
+# TopSix neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggGroup/hasMetalsTopSix.xlsx fisherAnalysis/results/aggGroup/TopSixNeu.xlsx 3.5 1> fisherAnalysis/results/aggGroup/statsTopSixNeu.out 2> fisherAnalysis/results/aggGroup/statsTopSixNeu.err
+
+echo "finished groupAggregate!"

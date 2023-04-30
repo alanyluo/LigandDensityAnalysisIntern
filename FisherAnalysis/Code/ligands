@@ -1,0 +1,309 @@
+#!/usr/bin/bash
+
+
+############ This bash script gets the Fisher's test data for each of the ligand datasets. Note that these are the unaggregated datasets. ############
+
+
+############ Get the regional discrepancy datasets for ADP, GTP, GDP, NAD, and FAD. ############
+# echo "getting ADP discrepancy data"
+# echo ""
+
+# time pdb_eda multiple globalData/standalone_adp_01-04-22.txt globalData/standalone_adp_01-04-22 --single-mode="difference --residue --type=ADP --include-pdbid" --time-out=3600 --skip 1> globalData/discrepADP.out 2> globalData/discrepADP.err
+
+# echo "getting GTP discrepancy data"
+# echo ""
+
+# time pdb_eda multiple globalData/standalone_gtp_01-04-22.txt globalData/standalone_gtp_01-04-22 --single-mode="difference --residue --type=GTP --include-pdbid" --time-out=3600 --skip 1> globalData/discrepGTP.out 2> globalData/discrepGTP.err
+
+# echo "getting GDP discrepancy data"
+# echo ""
+
+# time pdb_eda multiple globalData/standalone_gdp_01-04-22.txt globalData/standalone_gdp_01-04-22 --single-mode="difference --residue --type=GDP --include-pdbid" --time-out=3600 1> globalData/discrepGDP.out 2> globalData/discrepGDP.err
+
+# echo "getting NAD discrepancy data"
+# echo ""
+
+# time pdb_eda multiple globalData/standalone_nad_01-04-22.txt globalData/standalone_nad_01-04-22 --single-mode="difference --residue --type=NAD --include-pdbid" --time-out=3600 1> globalData/discrepNAD.out 2> globalData/discrepNAD.err
+
+# echo "getting FAD discrepancy data"
+# echo ""
+
+# time pdb_eda multiple globalData/missingFAD.txt globalData/standalone_fad_01-04-22 --single-mode="difference --residue --type=FAD --include-pdbid" --time-out=3600 1> globalData/discrepFAD.out 2> globalData/discrepFAD.err
+
+# echo "finished getting discrepancy data!"
+
+
+
+
+
+
+
+
+############ For each ligand, get the struct files. ##############
+
+# # ADP
+# echo "ADP struct files"
+# time python3 globalCode/fetchpdb.py globalData/standalone_adp_01-04-22.txt globalData/structFiles_adp_07-22-22/ 1> globalData/getStructADP.out 2> globalData/getStructADP.err
+
+# # GDP
+# echo "GDP struct files"
+# time python3 globalCode/fetchpdb.py globalData/standalone_gdp_01-04-22.txt globalData/structFiles_gdp_07-22-22/ 1> globalData/getStructGDP.out 2> globalData/getStructGDP.err
+
+# # GTP
+# echo "GTP struct files"
+# time python3 globalCode/fetchpdb.py globalData/standalone_gtp_01-04-22.txt globalData/structFiles_gtp_07-22-22/ 1> globalData/getStructGTP.out 2> globalData/getStructGTP.err
+
+# # NAD
+# echo "NAD struct files"
+# time python3 globalCode/fetchpdb.py globalData/standalone_nad_01-04-22.txt globalData/structFiles_nad_07-22-22/ 1> globalData/getStructNAD.out 2> globalData/getStructNAD.err
+
+# # FAD
+# echo "FAD struct files"
+# time python3 globalCode/fetchpdb.py globalData/standalone_fad_01-04-22.txt globalData/structFiles_fad_07-22-22/ 1> globalData/getStructFAD.out 2> globalData/getStructFAD.err
+
+# echo "finished struct files!"
+
+
+
+
+
+
+
+
+
+############ For each of these ligands, get the hasMetals datasets. ############
+
+# ATP
+# echo "ATP hasmetals topsix"
+# time python3 fisherAnalysis/code/getHasMetals.py globalData/standalone_atp_01-04-22.txt globalData/standalone_atp_01-04-22 ATP fisherAnalysis/results/aggAttempt3/hasMetalsATPTopSix.txt ZN,MG,CA,FE,NA,MN globalData/structFiles_atp_01-04-22/ 1> fisherAnalysis/results/aggAttempt3/fisherATPTopSix.out 2> fisherAnalysis/results/aggAttempt3/fisherATPTopSix.err
+
+echo "ATP hasmetals all"
+time python3 fisherAnalysis/code/getHasMetals.py globalData/standalone_atp_01-04-22.txt globalData/standalone_atp_01-04-22 ATP fisherAnalysis/results/aggAttempt3/hasMetalsATPAll.txt ZN,MG,CA,FE,NA,MN,K,CU,NI,CO,CD,HG,PT,MO,AL,V,BA,SR,RU,CS,W,YB,AU,Y,LI,PB,GD,TL,RB,SM,IR,PR,RH,EU,PD,AG,OS,LU,HO,TB,CR,GA,LA,SB,CE,ER,IN,BI,DY,BE,ZR,SN,HF,TA,RE,PA,U globalData/structFiles_atp_01-04-22/ 1> fisherAnalysis/results/aggAttempt3/fisherATPAll.out 2> fisherAnalysis/results/aggAttempt3/fisherATPAll.err
+
+
+# # ADP
+# echo "ADP hasmetals topsix"
+# time python3 fisherAnalysis/code/getHasMetals.py globalData/standalone_adp_01-04-22.txt globalData/standalone_adp_01-04-22 ADP fisherAnalysis/results/aggAttempt3/hasMetalsADPTopSix.txt ZN,MG,CA,FE,NA,MN globalData/structFiles_adp_07-22-22/ 1> fisherAnalysis/results/aggAttempt3/fisherADPTopSix.out 2> fisherAnalysis/results/aggAttempt3/fisherADPTopSix.err
+
+# echo "ADP hasmetals all"
+# time python3 fisherAnalysis/code/getHasMetals.py globalData/standalone_adp_01-04-22.txt globalData/standalone_adp_01-04-22 ADP fisherAnalysis/results/aggAttempt3/hasMetalsADPAll.txt ZN,MG,CA,FE,NA,MN,K,CU,NI,CO,CD,HG,PT,MO,AL,V,BA,SR,RU,CS,W,YB,AU,Y,LI,PB,GD,TL,RB,SM,IR,PR,RH,EU,PD,AG,OS,LU,HO,TB,CR,GA,LA,SB,CE,ER,IN,BI,DY,BE,ZR,SN,HF,TA,RE,PA,U globalData/structFiles_adp_07-22-22/ 1> fisherAnalysis/results/aggAttempt3/fisherADPAll.out 2> fisherAnalysis/results/aggAttempt3/fisherADPAll.err
+
+
+
+# # GTP
+# echo "GTP hasmetals topsix"
+# time python3 fisherAnalysis/code/getHasMetals.py globalData/standalone_gtp_01-04-22.txt globalData/standalone_gtp_01-04-22 GTP fisherAnalysis/results/aggAttempt3/hasMetalsGTPTopSix.txt ZN,MG,CA,FE,NA,MN globalData/structFiles_gtp_07-22-22/ 1> fisherAnalysis/results/aggAttempt3/fisherGTPTopSix.out 2> fisherAnalysis/results/aggAttempt3/fisherGTPTopSix.err
+
+
+# echo "GTP hasmetals all"
+# time python3 fisherAnalysis/code/getHasMetals.py globalData/standalone_gtp_01-04-22.txt globalData/standalone_gtp_01-04-22 GTP fisherAnalysis/results/aggAttempt3/hasMetalsGTPAll.txt ZN,MG,CA,FE,NA,MN,K,CU,NI,CO,CD,HG,PT,MO,AL,V,BA,SR,RU,CS,W,YB,AU,Y,LI,PB,GD,TL,RB,SM,IR,PR,RH,EU,PD,AG,OS,LU,HO,TB,CR,GA,LA,SB,CE,ER,IN,BI,DY,BE,ZR,SN,HF,TA,RE,PA,U globalData/structFiles_gtp_07-22-22/ 1> fisherAnalysis/results/aggAttempt3/fisherGTPAll.out 2> fisherAnalysis/results/aggAttempt3/fisherGTPAll.err
+
+
+
+# # GDP
+# echo "GDP hasmetals topsix"
+# time python3 fisherAnalysis/code/getHasMetals.py globalData/standalone_gdp_01-04-22.txt globalData/standalone_gdp_01-04-22 GDP fisherAnalysis/results/aggAttempt3/hasMetalsGDPTopSix.txt ZN,MG,CA,FE,NA,MN globalData/structFiles_gdp_07-22-22/ 1> fisherAnalysis/results/aggAttempt3/fisherGDPTopSix.out 2> fisherAnalysis/results/aggAttempt3/fisherGDPTopSix.err
+
+# echo "GDP hasmetals all"
+# time python3 fisherAnalysis/code/getHasMetals.py globalData/standalone_gdp_01-04-22.txt globalData/standalone_gdp_01-04-22 GDP fisherAnalysis/results/aggAttempt3/hasMetalsGDPAll.txt ZN,MG,CA,FE,NA,MN,K,CU,NI,CO,CD,HG,PT,MO,AL,V,BA,SR,RU,CS,W,YB,AU,Y,LI,PB,GD,TL,RB,SM,IR,PR,RH,EU,PD,AG,OS,LU,HO,TB,CR,GA,LA,SB,CE,ER,IN,BI,DY,BE,ZR,SN,HF,TA,RE,PA,U globalData/structFiles_gdp_07-22-22/ 1> fisherAnalysis/results/aggAttempt3/fisherGDPAll.out 2> fisherAnalysis/results/aggAttempt3/fisherGDPAll.err
+
+
+
+# # NAD
+# echo "NAD hasmetals topsix"
+# time python3 fisherAnalysis/code/getHasMetals.py globalData/standalone_nad_01-04-22.txt globalData/standalone_nad_01-04-22 NAD fisherAnalysis/results/aggAttempt3/hasMetalsNADTopSix.txt ZN,MG,CA,FE,NA,MN globalData/structFiles_nad_07-22-22/ 1> fisherAnalysis/results/aggAttempt3/fisherNADTopSix.out 2> fisherAnalysis/results/aggAttempt3/fisherNADTopSix.err
+
+# echo "NAD hasmetals all"
+# time python3 fisherAnalysis/code/getHasMetals.py globalData/standalone_nad_01-04-22.txt globalData/standalone_nad_01-04-22 NAD fisherAnalysis/results/aggAttempt3/hasMetalsNADAll.txt ZN,MG,CA,FE,NA,MN,K,CU,NI,CO,CD,HG,PT,MO,AL,V,BA,SR,RU,CS,W,YB,AU,Y,LI,PB,GD,TL,RB,SM,IR,PR,RH,EU,PD,AG,OS,LU,HO,TB,CR,GA,LA,SB,CE,ER,IN,BI,DY,BE,ZR,SN,HF,TA,RE,PA,U globalData/structFiles_nad_07-22-22/ 1> fisherAnalysis/results/aggAttempt3/fisherNADAll.out 2> fisherAnalysis/results/aggAttempt3/fisherNADAll.err
+
+
+
+# # FAD
+# echo "FAD hasmetals topsix"
+# time python3 fisherAnalysis/code/getHasMetals.py globalData/standalone_fad_01-04-22.txt globalData/standalone_fad_01-04-22 FAD fisherAnalysis/results/aggAttempt3/hasMetalsFADTopSix.txt ZN,MG,CA,FE,NA,MN globalData/structFiles_fad_07-22-22/ 1> fisherAnalysis/results/aggAttempt3/fisherFADTopSix.out 2> fisherAnalysis/results/aggAttempt3/fisherFADTopSix.err
+
+# echo "FAD hasmetals all"
+# time python3 fisherAnalysis/code/getHasMetals.py globalData/standalone_fad_01-04-22.txt globalData/standalone_fad_01-04-22 FAD fisherAnalysis/results/aggAttempt3/hasMetalsFADAll.txt ZN,MG,CA,FE,NA,MN,K,CU,NI,CO,CD,HG,PT,MO,AL,V,BA,SR,RU,CS,W,YB,AU,Y,LI,PB,GD,TL,RB,SM,IR,PR,RH,EU,PD,AG,OS,LU,HO,TB,CR,GA,LA,SB,CE,ER,IN,BI,DY,BE,ZR,SN,HF,TA,RE,PA,U globalData/structFiles_fad_07-22-22/ 1> fisherAnalysis/results/aggAttempt3/fisherFADAll.out 2> fisherAnalysis/results/aggAttempt3/fisherFADAll.err
+
+echo "finished hasmetals!"
+
+
+
+
+
+
+
+
+
+############ For each ligand: Get the results files, and then do the Fisher's test for 1%, 2.5%, 5%, and 10%. ############
+
+
+# ATP
+
+echo "ATP"
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggAttempt3/hasMetalsATPAll.txt hasMetalsATPAll m 1> fisherAnalysis/results/aggAttempt3/hasMetalsATPAll.out 2> fisherAnalysis/results/aggAttempt3/hasMetalsATPAll.err
+
+# time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggAttempt3/hasMetalsATPTopSix.txt hasMetalsATPTopSix m 1> fisherAnalysis/results/aggAttempt3/hasMetalsATPTopSix.out 2> fisherAnalysis/results/aggAttempt3/hasMetalsATPTopSix.err
+
+# ATP all
+
+time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsATPAll.xlsx 0.01 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsATPAll1%.out 2> fisherAnalysis/results/aggAttempt3/statsATPAll1%.err
+
+time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsATPAll.xlsx 0.025 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsATPAll2.5%.out 2> fisherAnalysis/results/aggAttempt3/statsATPAll2.5%.err
+
+time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsATPAll.xlsx 0.05 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsATPAll5%.out 2> fisherAnalysis/results/aggAttempt3/statsATPAll5%.err
+
+time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsATPAll.xlsx 0.1 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsATPAll10%.out 2> fisherAnalysis/results/aggAttempt3/statsATPAll10%.err
+
+# # ATP topsix
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsATPTopSix.xlsx 0.01 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsATPTopSix1%.out 2> fisherAnalysis/results/aggAttempt3/statsATPTopSix1%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsATPTopSix.xlsx 0.025 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsATPTopSix2.5%.out 2> fisherAnalysis/results/aggAttempt3/statsATPTopSix2.5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsATPTopSix.xlsx 0.05 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsATPTopSix5%.out 2> fisherAnalysis/results/aggAttempt3/statsATPTopSix5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsATPTopSix.xlsx 0.1 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsATPTopSix10%.out 2> fisherAnalysis/results/aggAttempt3/statsATPTopSix10%.err
+
+
+
+# # ADP
+
+# echo "ADP"
+# time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggAttempt3/hasMetalsADPAll.txt hasMetalsADPAll m 1> fisherAnalysis/results/aggAttempt3/hasMetalsADPAll.out 2> fisherAnalysis/results/aggAttempt3/hasMetalsADPAll.err
+
+# time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggAttempt3/hasMetalsADPTopSix.txt hasMetalsADPTopSix m 1> fisherAnalysis/results/aggAttempt3/hasMetalsADPTopSix.out 2> fisherAnalysis/results/aggAttempt3/hasMetalsADPTopSix.err
+
+# # ADP all
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsADPAll.xlsx 0.01 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsADPAll1%.out 2> fisherAnalysis/results/aggAttempt3/statsADPAll1%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsADPAll.xlsx 0.025 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsADPAll2.5%.out 2> fisherAnalysis/results/aggAttempt3/statsADPAll2.5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsADPAll.xlsx 0.05 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsADPAll5%.out 2> fisherAnalysis/results/aggAttempt3/statsADPAll5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsADPAll.xlsx 0.1 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsADPAll10%.out 2> fisherAnalysis/results/aggAttempt3/statsADPAll10%.err
+
+# # ADP topsix
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsADPTopSix.xlsx 0.01 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsADPTopSix1%.out 2> fisherAnalysis/results/aggAttempt3/statsADPTopSix1%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsADPTopSix.xlsx 0.025 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsADPTopSix2.5%.out 2> fisherAnalysis/results/aggAttempt3/statsADPTopSix2.5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsADPTopSix.xlsx 0.05 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsADPTopSix5%.out 2> fisherAnalysis/results/aggAttempt3/statsADPTopSix5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsADPTopSix.xlsx 0.1 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsADPTopSix10%.out 2> fisherAnalysis/results/aggAttempt3/statsADPTopSix10%.err
+
+
+# # GDP
+
+# echo "GDP"
+# time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggAttempt3/hasMetalsGDPAll.txt hasMetalsGDPAll m 1> fisherAnalysis/results/aggAttempt3/hasMetalsGDPAll.out 2> fisherAnalysis/results/aggAttempt3/hasMetalsGDPAll.err
+
+# time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggAttempt3/hasMetalsGDPTopSix.txt hasMetalsGDPTopSix m 1> fisherAnalysis/results/aggAttempt3/hasMetalsGDPTopSix.out 2> fisherAnalysis/results/aggAttempt3/hasMetalsGDPTopSix.err
+
+# # GDP all
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGDPAll.xlsx 0.01 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGDPAll1%.out 2> fisherAnalysis/results/aggAttempt3/statsGDPAll1%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGDPAll.xlsx 0.025 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGDPAll2.5%.out 2> fisherAnalysis/results/aggAttempt3/statsGDPAll2.5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGDPAll.xlsx 0.05 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGDPAll5%.out 2> fisherAnalysis/results/aggAttempt3/statsGDPAll5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGDPAll.xlsx 0.1 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGDPAll10%.out 2> fisherAnalysis/results/aggAttempt3/statsGDPAll10%.err
+
+# # GDP topsix
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGDPTopSix.xlsx 0.01 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGDPTopSix1%.out 2> fisherAnalysis/results/aggAttempt3/statsGDPTopSix1%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGDPTopSix.xlsx 0.025 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGDPTopSix2.5%.out 2> fisherAnalysis/results/aggAttempt3/statsGDPTopSix2.5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGDPTopSix.xlsx 0.05 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGDPTopSix5%.out 2> fisherAnalysis/results/aggAttempt3/statsGDPTopSix5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGDPTopSix.xlsx 0.1 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGDPTopSix10%.out 2> fisherAnalysis/results/aggAttempt3/statsGDPTopSix10%.err
+
+
+# # GTP
+
+# echo "GTP"
+# time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggAttempt3/hasMetalsGTPAll.txt hasMetalsGTPAll m 1> fisherAnalysis/results/aggAttempt3/hasMetalsGTPAll.out 2> fisherAnalysis/results/aggAttempt3/hasMetalsGTPAll.err
+
+# time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggAttempt3/hasMetalsGTPTopSix.txt hasMetalsGTPTopSix m 1> fisherAnalysis/results/aggAttempt3/hasMetalsGTPTopSix.out 2> fisherAnalysis/results/aggAttempt3/hasMetalsGTPTopSix.err
+
+# # GTP all
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGTPAll.xlsx 0.01 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGTPAll1%.out 2> fisherAnalysis/results/aggAttempt3/statsGTPAll1%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGTPAll.xlsx 0.025 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGTPAll2.5%.out 2> fisherAnalysis/results/aggAttempt3/statsGTPAll2.5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGTPAll.xlsx 0.05 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGTPAll5%.out 2> fisherAnalysis/results/aggAttempt3/statsGTPAll5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGTPAll.xlsx 0.1 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGTPAll10%.out 2> fisherAnalysis/results/aggAttempt3/statsGTPAll10%.err
+
+# # GTP topsix
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGTPTopSix.xlsx 0.01 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGTPTopSix1%.out 2> fisherAnalysis/results/aggAttempt3/statsGTPTopSix1%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGTPTopSix.xlsx 0.025 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGTPTopSix2.5%.out 2> fisherAnalysis/results/aggAttempt3/statsGTPTopSix2.5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGTPTopSix.xlsx 0.05 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGTPTopSix5%.out 2> fisherAnalysis/results/aggAttempt3/statsGTPTopSix5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsGTPTopSix.xlsx 0.1 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsGTPTopSix10%.out 2> fisherAnalysis/results/aggAttempt3/statsGTPTopSix10%.err
+
+
+# # FAD
+
+# echo "FAD"
+# time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggAttempt3/hasMetalsFADAll.txt hasMetalsFADAll m 1> fisherAnalysis/results/aggAttempt3/hasMetalsFADAll.out 2> fisherAnalysis/results/aggAttempt3/hasMetalsFADAll.err
+
+# time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggAttempt3/hasMetalsFADTopSix.txt hasMetalsFADTopSix m 1> fisherAnalysis/results/aggAttempt3/hasMetalsFADTopSix.out 2> fisherAnalysis/results/aggAttempt3/hasMetalsFADTopSix.err
+
+# # FAD all
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsFADAll.xlsx 0.01 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsFADAll1%.out 2> fisherAnalysis/results/aggAttempt3/statsFADAll1%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsFADAll.xlsx 0.025 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsFADAll2.5%.out 2> fisherAnalysis/results/aggAttempt3/statsFADAll2.5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsFADAll.xlsx 0.05 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsFADAll5%.out 2> fisherAnalysis/results/aggAttempt3/statsFADAll5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsFADAll.xlsx 0.1 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsFADAll10%.out 2> fisherAnalysis/results/aggAttempt3/statsFADAll10%.err
+
+# # FAD topsix
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsFADTopSix.xlsx 0.01 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsFADTopSix1%.out 2> fisherAnalysis/results/aggAttempt3/statsFADTopSix1%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsFADTopSix.xlsx 0.025 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsFADTopSix2.5%.out 2> fisherAnalysis/results/aggAttempt3/statsFADTopSix2.5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsFADTopSix.xlsx 0.05 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsFADTopSix5%.out 2> fisherAnalysis/results/aggAttempt3/statsFADTopSix5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsFADTopSix.xlsx 0.1 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsFADTopSix10%.out 2> fisherAnalysis/results/aggAttempt3/statsFADTopSix10%.err
+
+
+# # NAD
+
+# echo "NAD"
+# time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggAttempt3/hasMetalsNADAll.txt hasMetalsNADAll m 1> fisherAnalysis/results/aggAttempt3/hasMetalsNADAll.out 2> fisherAnalysis/results/aggAttempt3/hasMetalsNADAll.err
+
+# time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/aggAttempt3/hasMetalsNADTopSix.txt hasMetalsNADTopSix m 1> fisherAnalysis/results/aggAttempt3/hasMetalsNADTopSix.out 2> fisherAnalysis/results/aggAttempt3/hasMetalsNADTopSix.err
+
+# # NAD all
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsNADAll.xlsx 0.01 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsNADAll1%.out 2> fisherAnalysis/results/aggAttempt3/statsNADAll1%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsNADAll.xlsx 0.025 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsNADAll2.5%.out 2> fisherAnalysis/results/aggAttempt3/statsNADAll2.5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsNADAll.xlsx 0.05 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsNADAll5%.out 2> fisherAnalysis/results/aggAttempt3/statsNADAll5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsNADAll.xlsx 0.1 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsNADAll10%.out 2> fisherAnalysis/results/aggAttempt3/statsNADAll10%.err
+
+# # NAD topsix
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsNADTopSix.xlsx 0.01 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsNADTopSix1%.out 2> fisherAnalysis/results/aggAttempt3/statsNADTopSix1%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsNADTopSix.xlsx 0.025 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsNADTopSix2.5%.out 2> fisherAnalysis/results/aggAttempt3/statsNADTopSix2.5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsNADTopSix.xlsx 0.05 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsNADTopSix5%.out 2> fisherAnalysis/results/aggAttempt3/statsNADTopSix5%.err
+
+# time python3 fisherAnalysis/code/fisher.py fisherAnalysis/results/aggAttempt3/hasMetalsNADTopSix.xlsx 0.1 m 3.5 1> fisherAnalysis/results/aggAttempt3/statsNADTopSix10%.out 2> fisherAnalysis/results/aggAttempt3/statsNADTopSix10%.err
+
+echo "finished ligands!"

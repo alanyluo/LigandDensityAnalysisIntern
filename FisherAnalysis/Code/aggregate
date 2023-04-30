@@ -1,0 +1,79 @@
+#!/usr/bin/bash
+
+########## Aggregate all the ligand datasets. ##########
+
+echo "agg all"
+
+# all 1%
+
+time python3 fisherAnalysis/code/getAggregates.py fisherAnalysis/results/aggAttempt3/statsADPAll1%.out,fisherAnalysis/results/aggAttempt3/statsATPAll1%.out,fisherAnalysis/results/aggAttempt3/statsFADAll1%.out,fisherAnalysis/results/aggAttempt3/statsGDPAll1%.out,fisherAnalysis/results/aggAttempt3/statsGTPAll1%.out,fisherAnalysis/results/aggAttempt3/statsNADAll1%.out 1> fisherAnalysis/results/aggAttempt3/statsAll1%.out 2> fisherAnalysis/results/aggAttempt3/statsAll1%.err
+
+# all 2.5%
+
+time python3 fisherAnalysis/code/getAggregates.py fisherAnalysis/results/aggAttempt3/statsADPAll2.5%.out,fisherAnalysis/results/aggAttempt3/statsATPAll2.5%.out,fisherAnalysis/results/aggAttempt3/statsFADAll2.5%.out,fisherAnalysis/results/aggAttempt3/statsGDPAll2.5%.out,fisherAnalysis/results/aggAttempt3/statsGTPAll2.5%.out,fisherAnalysis/results/aggAttempt3/statsNADAll2.5%.out 1> fisherAnalysis/results/aggAttempt3/statsAll2.5%.out 2> fisherAnalysis/results/aggAttempt3/statsAll2.5%.err
+
+# all 5%
+
+time python3 fisherAnalysis/code/getAggregates.py fisherAnalysis/results/aggAttempt3/statsADPAll5%.out,fisherAnalysis/results/aggAttempt3/statsATPAll5%.out,fisherAnalysis/results/aggAttempt3/statsFADAll5%.out,fisherAnalysis/results/aggAttempt3/statsGDPAll5%.out,fisherAnalysis/results/aggAttempt3/statsGTPAll5%.out,fisherAnalysis/results/aggAttempt3/statsNADAll5%.out 1> fisherAnalysis/results/aggAttempt3/statsAll5%.out 2> fisherAnalysis/results/aggAttempt3/statsAll5%.err
+
+# all 10%
+
+time python3 fisherAnalysis/code/getAggregates.py fisherAnalysis/results/aggAttempt3/statsADPAll10%.out,fisherAnalysis/results/aggAttempt3/statsATPAll10%.out,fisherAnalysis/results/aggAttempt3/statsFADAll10%.out,fisherAnalysis/results/aggAttempt3/statsGDPAll10%.out,fisherAnalysis/results/aggAttempt3/statsGTPAll10%.out,fisherAnalysis/results/aggAttempt3/statsNADAll10%.out 1> fisherAnalysis/results/aggAttempt3/statsAll10%.out 2> fisherAnalysis/results/aggAttempt3/statsAll10%.err
+
+
+echo "agg topsix"
+
+# TopSix 1%
+
+time python3 fisherAnalysis/code/getAggregates.py fisherAnalysis/results/aggAttempt3/statsADPTopSix1%.out,fisherAnalysis/results/aggAttempt3/statsATPTopSix1%.out,fisherAnalysis/results/aggAttempt3/statsFADTopSix1%.out,fisherAnalysis/results/aggAttempt3/statsGDPTopSix1%.out,fisherAnalysis/results/aggAttempt3/statsGTPTopSix1%.out,fisherAnalysis/results/aggAttempt3/statsNADTopSix1%.out 1> fisherAnalysis/results/aggAttempt3/statsTopSix1%.out 2> fisherAnalysis/results/aggAttempt3/statsTopSix1%.err
+
+# topsix 2.5%
+
+time python3 fisherAnalysis/code/getAggregates.py fisherAnalysis/results/aggAttempt3/statsADPTopSix2.5%.out,fisherAnalysis/results/aggAttempt3/statsATPTopSix2.5%.out,fisherAnalysis/results/aggAttempt3/statsFADTopSix2.5%.out,fisherAnalysis/results/aggAttempt3/statsGDPTopSix2.5%.out,fisherAnalysis/results/aggAttempt3/statsGTPTopSix2.5%.out,fisherAnalysis/results/aggAttempt3/statsNADTopSix2.5%.out 1> fisherAnalysis/results/aggAttempt3/statsTopSix2.5%.out 2> fisherAnalysis/results/aggAttempt3/statsTopSix2.5%.err
+
+# TopSix 5%
+
+time python3 fisherAnalysis/code/getAggregates.py fisherAnalysis/results/aggAttempt3/statsADPTopSix5%.out,fisherAnalysis/results/aggAttempt3/statsATPTopSix5%.out,fisherAnalysis/results/aggAttempt3/statsFADTopSix5%.out,fisherAnalysis/results/aggAttempt3/statsGDPTopSix5%.out,fisherAnalysis/results/aggAttempt3/statsGTPTopSix5%.out,fisherAnalysis/results/aggAttempt3/statsNADTopSix5%.out 1> fisherAnalysis/results/aggAttempt3/statsTopSix5%.out 2> fisherAnalysis/results/aggAttempt3/statsTopSix5%.err
+
+# TopSix 10%
+
+time python3 fisherAnalysis/code/getAggregates.py fisherAnalysis/results/aggAttempt3/statsADPTopSix10%.out,fisherAnalysis/results/aggAttempt3/statsATPTopSix10%.out,fisherAnalysis/results/aggAttempt3/statsFADTopSix10%.out,fisherAnalysis/results/aggAttempt3/statsGDPTopSix10%.out,fisherAnalysis/results/aggAttempt3/statsGTPTopSix10%.out,fisherAnalysis/results/aggAttempt3/statsNADTopSix10%.out 1> fisherAnalysis/results/aggAttempt3/statsTopSix10%.out 2> fisherAnalysis/results/aggAttempt3/statsTopSix10%.err
+
+
+
+
+
+
+
+
+
+
+
+
+########## Get the Fisher's test data for these aggregate datasets. ##########
+
+echo "fisher all"
+
+# all datasets
+
+time python3 fisherAnalysis/code/quickFisher.py fisherAnalysis/results/aggAttempt3/statsAll1%.out 1> fisherAnalysis/results/aggAttempt3/aggStatsAll1%.out 2> fisherAnalysis/results/aggAttempt3/aggStatsAll1%.err
+
+time python3 fisherAnalysis/code/quickFisher.py fisherAnalysis/results/aggAttempt3/statsAll2.5%.out 1> fisherAnalysis/results/aggAttempt3/aggStatsAll2.5%.out 2> fisherAnalysis/results/aggAttempt3/aggStatsAll2.5%.err
+
+time python3 fisherAnalysis/code/quickFisher.py fisherAnalysis/results/aggAttempt3/statsAll5%.out 1> fisherAnalysis/results/aggAttempt3/aggStatsAll5%.out 2> fisherAnalysis/results/aggAttempt3/aggStatsAll5%.err
+
+time python3 fisherAnalysis/code/quickFisher.py fisherAnalysis/results/aggAttempt3/statsAll10%.out 1> fisherAnalysis/results/aggAttempt3/aggStatsAll10%.out 2> fisherAnalysis/results/aggAttempt3/aggStatsAll10%.err
+
+echo "fisher topsix"
+
+# topsix datasets
+
+time python3 fisherAnalysis/code/quickFisher.py fisherAnalysis/results/aggAttempt3/statsTopSix1%.out 1> fisherAnalysis/results/aggAttempt3/aggStatsTopSix1%.out 2> fisherAnalysis/results/aggAttempt3/aggStatsTopSix1%.err
+
+time python3 fisherAnalysis/code/quickFisher.py fisherAnalysis/results/aggAttempt3/statsTopSix2.5%.out 1> fisherAnalysis/results/aggAttempt3/aggStatsTopSix2.5%.out 2> fisherAnalysis/results/aggAttempt3/aggStatsTopSix2.5%.err
+
+time python3 fisherAnalysis/code/quickFisher.py fisherAnalysis/results/aggAttempt3/statsTopSix5%.out 1> fisherAnalysis/results/aggAttempt3/aggStatsTopSix5%.out 2> fisherAnalysis/results/aggAttempt3/aggStatsTopSix5%.err
+
+time python3 fisherAnalysis/code/quickFisher.py fisherAnalysis/results/aggAttempt3/statsTopSix10%.out 1> fisherAnalysis/results/aggAttempt3/aggStatsTopSix10%.out 2> fisherAnalysis/results/aggAttempt3/aggStatsTopSix10%.err
+
+echo "finished agg!"

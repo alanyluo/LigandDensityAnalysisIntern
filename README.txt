@@ -1,0 +1,2 @@
+This repository contains the Python and bash scripts used for the Ligand Electron Density Analysis research project.
+This repository was created to present my code to prospective employers. The original repository contains these code as well as all the data that I collected. These data were acquired from running these scripts. They are excluded here due to the sheer collective amount of storage that they occupy.

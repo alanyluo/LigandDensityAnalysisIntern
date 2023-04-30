@@ -1,0 +1,514 @@
+#!/usr/bin/bash
+
+########## Perform the grouping analysis on other coenzymes not processed in groupAnalysis. Here are these other coenzymes: PLQ (quinone), COA (Coenzyme A), TPP (thiamine pyrophosphate), PLP (pyridoxal phosphate), BTN (biotin),  UDP (uridine disphosphate N-acetylglucosamine), B12 (5'-deoxyadenosyl cobalamin), THG (tetrahydrofolate). ##########
+
+########## TODO: Check that the file paths are correct, and then run the script. CURRENTLY, you are checking that the file paths are correct, and are writing up the commands to get the hasMetals datasets, which are needed to run before you can run this script. ##########
+
+
+
+########## TODO: Finish writing this. CURRENTLY, you are first getting the discrepancy data for these ligands. This is for the <discrepDirPath> listed here. ##########
+
+
+########## For each ligand dataset, get the hasMetals dataset. ##########
+
+# PLQ
+echo "plq hasMetals"
+time python3 fisherAnalysis/getHasMetals.py globalData/standalone_plq_10-20-22.txt <discrepDirPath> <ligandName> <resultFilePath> <metalNameList> <structFileDirPath>
+
+# COA
+echo "coa hasMetals"
+time python3 fisherAnalysis/getHasMetals.py globalData/standalone_coa_08-12-22.txt <discrepDirPath> <ligandName> <resultFilePath> <metalNameList> <structFileDirPath>
+
+# TPP
+echo "tpp hasMetals"
+time python3 fisherAnalysis/getHasMetals.py globalData/standalone_tpp_08-12-22.txt <discrepDirPath> <ligandName> <resultFilePath> <metalNameList> <structFileDirPath>
+
+# PLP
+echo "plp hasMetals"
+time python3 fisherAnalysis/getHasMetals.py globalData/standalone_plp_08-12-22.txt <discrepDirPath> <ligandName> <resultFilePath> <metalNameList> <structFileDirPath>
+
+# BTN
+echo "btn hasMetals"
+time python3 fisherAnalysis/getHasMetals.py globalData/standalone_btn_08-12-22.txt <discrepDirPath> <ligandName> <resultFilePath> <metalNameList> <structFileDirPath>
+
+# UDP
+echo "udp hasMetals"
+time python3 fisherAnalysis/getHasMetals.py globalData/standalone_udp_10-20-22.txt <discrepDirPath> <ligandName> <resultFilePath> <metalNameList> <structFileDirPath>
+
+# B12
+echo "b12 hasMetals"
+time python3 fisherAnalysis/getHasMetals.py globalData/standalone_b12_10-20-22.txt <discrepDirPath> <ligandName> <resultFilePath> <metalNameList> <structFileDirPath>
+
+# THG
+echo "thg hasMetals"
+time python3 fisherAnalysis/getHasMetals.py globalData/standalone_thg_10-20-22.txt <discrepDirPath> <ligandName> <resultFilePath> <metalNameList> <structFileDirPath>
+
+
+
+########## For each ligand dataset, group each residue into pos, neg, or neutral. ##########
+
+# B12
+
+echo "b12 group"
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/completeGroup/hasMetalsB12All.txt fisherAnalysis/results/group2/b12AllPos.txt fisherAnalysis/results/group2/b12AllNeg.txt fisherAnalysis/results/group2/b12AllNeu.txt 1> fisherAnalysis/results/group2/b12All.out 2> fisherAnalysis/results/group2/b12All.err
+
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/aggAttempt3/hasMetalsB12TopSix.txt fisherAnalysis/results/group2/b12TopSixPos.txt fisherAnalysis/results/group2/b12TopSixNeg.txt fisherAnalysis/results/group2/b12TopSixNeu.txt 1> fisherAnalysis/results/group2/b12TopSix.out 2> fisherAnalysis/results/group2/b12TopSix.err
+
+
+# THG
+
+echo "thg group"
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/completeGroup/hasMetalsTHGAll.txt fisherAnalysis/results/group2/thgAllPos.txt fisherAnalysis/results/group2/thgAllNeg.txt fisherAnalysis/results/group2/thgAllNeu.txt 1> fisherAnalysis/results/group2/thgAll.out 2> fisherAnalysis/results/group2/thgAll.err
+
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/aggAttempt3/hasMetalsTHGTopSix.txt fisherAnalysis/results/group2/thgTopSixPos.txt fisherAnalysis/results/group2/thgTopSixNeg.txt fisherAnalysis/results/group2/thgTopSixNeu.txt 1> fisherAnalysis/results/group2/thgTopSix.out 2> fisherAnalysis/results/group2/thgTopSix.err
+
+
+
+# PLQ
+
+echo "plq group"
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/completeGroup/hasMetalsPLQAll.txt fisherAnalysis/results/group2/plqAllPos.txt fisherAnalysis/results/group2/plqAllNeg.txt fisherAnalysis/results/group2/plqAllNeu.txt 1> fisherAnalysis/results/group2/plqAll.out 2> fisherAnalysis/results/group2/plqAll.err
+
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/aggAttempt3/hasMetalsPLQTopSix.txt fisherAnalysis/results/group2/plqTopSixPos.txt fisherAnalysis/results/group2/plqTopSixNeg.txt fisherAnalysis/results/group2/plqTopSixNeu.txt 1> fisherAnalysis/results/group2/plqTopSix.out 2> fisherAnalysis/results/group2/plqTopSix.err
+
+
+# COA
+
+echo "coa group"
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/aggAttempt3/hasMetalsCOAAll.txt fisherAnalysis/results/group2/coaAllPos.txt fisherAnalysis/results/group2/coaAllNeg.txt fisherAnalysis/results/group2/coaAllNeu.txt 1> fisherAnalysis/results/group2/coaAll.out 2> fisherAnalysis/results/group2/coaAll.err
+
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/aggAttempt3/hasMetalsCOATopSix.txt fisherAnalysis/results/group2/coaTopSixPos.txt fisherAnalysis/results/group2/coaTopSixNeg.txt fisherAnalysis/results/group2/coaTopSixNeu.txt 1> fisherAnalysis/results/group2/coaTopSix.out 2> fisherAnalysis/results/group2/coaTopSix.err
+
+
+# PLP
+
+echo "plp group"
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/aggAttempt3/hasMetalsPLPAll.txt fisherAnalysis/results/group2/plpAllPos.txt fisherAnalysis/results/group2/plpAllNeg.txt fisherAnalysis/results/group2/plpAllNeu.txt 1> fisherAnalysis/results/group2/plpAll.out 2> fisherAnalysis/results/group2/plpAll.err
+
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/aggAttempt3/hasMetalsPLPTopSix.txt fisherAnalysis/results/group2/plpTopSixPos.txt fisherAnalysis/results/group2/plpTopSixNeg.txt fisherAnalysis/results/group2/plpTopSixNeu.txt 1> fisherAnalysis/results/group2/plpTopSix.out 2> fisherAnalysis/results/group2/plpTopSix.err
+
+
+# TPP
+
+echo "tpp group"
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/aggAttempt3/hasMetalsTPPAll.txt fisherAnalysis/results/group2/tppAllPos.txt fisherAnalysis/results/group2/tppAllNeg.txt fisherAnalysis/results/group2/tppAllNeu.txt 1> fisherAnalysis/results/group2/tppAll.out 2> fisherAnalysis/results/group2/tppAll.err
+
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/aggAttempt3/hasMetalsTPPTopSix.txt fisherAnalysis/results/group2/tppTopSixPos.txt fisherAnalysis/results/group2/tppTopSixNeg.txt fisherAnalysis/results/group2/tppTopSixNeu.txt 1> fisherAnalysis/results/group2/tppTopSix.out 2> fisherAnalysis/results/group2/tppTopSix.err
+
+
+# UDP
+
+echo "udp group"
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/aggAttempt3/hasMetalsUDPAll.txt fisherAnalysis/results/group2/udpAllPos.txt fisherAnalysis/results/group2/udpAllNeg.txt fisherAnalysis/results/group2/udpAllNeu.txt 1> fisherAnalysis/results/group2/udpAll.out 2> fisherAnalysis/results/group2/udpAll.err
+
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/aggAttempt3/hasMetalsUDPTopSix.txt fisherAnalysis/results/group2/udpTopSixPos.txt fisherAnalysis/results/group2/udpTopSixNeg.txt fisherAnalysis/results/group2/udpTopSixNeu.txt 1> fisherAnalysis/results/group2/udpTopSix.out 2> fisherAnalysis/results/group2/udpTopSix.err
+
+
+# BTN
+
+echo "btn group"
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/aggAttempt3/hasMetalsBTNAll.txt fisherAnalysis/results/group2/btnAllPos.txt fisherAnalysis/results/group2/btnAllNeg.txt fisherAnalysis/results/group2/btnAllNeu.txt 1> fisherAnalysis/results/group2/btnAll.out 2> fisherAnalysis/results/group2/btnAll.err
+
+time python3 fisherAnalysis/code/group.py fisherAnalysis/results/aggAttempt3/hasMetalsBTNTopSix.txt fisherAnalysis/results/group2/btnTopSixPos.txt fisherAnalysis/results/group2/btnTopSixNeg.txt fisherAnalysis/results/group2/btnTopSixNeu.txt 1> fisherAnalysis/results/group2/btnTopSix.out 2> fisherAnalysis/results/group2/btnTopSix.err
+
+echo "finished grouping!"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+########## Get the spreadsheet for each dataset. ##########
+
+# B12
+
+echo "b12 results"
+# all
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/b12AllPos.txt b12AllPos m 1> fisherAnalysis/results/group2/b12AllPosResult.out 2> fisherAnalysis/results/group2/b12AllPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/b12AllNeg.txt b12AllNeg m 1> fisherAnalysis/results/group2/b12AllNegResult.out 2> fisherAnalysis/results/group2/b12AllNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/b12AllNeu.txt b12AllNeu m 1> fisherAnalysis/results/group2/b12AllNeuResult.out 2> fisherAnalysis/results/group2/b12AllNeuResult.err
+
+
+# topsix
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/b12TopSixPos.txt b12TopSixPos m 1> fisherAnalysis/results/group2/b12TopSixPosResult.out 2> fisherAnalysis/results/group2/b12TopSixPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/b12TopSixNeg.txt b12TopSixNeg m 1> fisherAnalysis/results/group2/b12TopSixNegResult.out 2> fisherAnalysis/results/group2/b12TopSixNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/b12TopSixNeu.txt b12TopSixNeu m 1> fisherAnalysis/results/group2/b12TopSixNeuResult.out 2> fisherAnalysis/results/group2/b12TopSixNeuResult.err
+
+
+
+
+
+# THG
+
+echo "thg results"
+# all
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/thgAllPos.txt thgAllPos m 1> fisherAnalysis/results/group2/thgAllPosResult.out 2> fisherAnalysis/results/group2/thgAllPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/thgAllNeg.txt thgAllNeg m 1> fisherAnalysis/results/group2/thgAllNegResult.out 2> fisherAnalysis/results/group2/thgAllNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/thgAllNeu.txt thgAllNeu m 1> fisherAnalysis/results/group2/thgAllNeuResult.out 2> fisherAnalysis/results/group2/thgAllNeuResult.err
+
+
+# topsix
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/thgTopSixPos.txt thgTopSixPos m 1> fisherAnalysis/results/group2/thgTopSixPosResult.out 2> fisherAnalysis/results/group2/thgTopSixPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/thgTopSixNeg.txt thgTopSixNeg m 1> fisherAnalysis/results/group2/thgTopSixNegResult.out 2> fisherAnalysis/results/group2/thgTopSixNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/thgTopSixNeu.txt thgTopSixNeu m 1> fisherAnalysis/results/group2/thgTopSixNeuResult.out 2> fisherAnalysis/results/group2/thgTopSixNeuResult.err
+
+
+
+
+
+# PLQ
+
+echo "plq results"
+# all
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/plqAllPos.txt plqAllPos m 1> fisherAnalysis/results/group2/plqAllPosResult.out 2> fisherAnalysis/results/group2/plqAllPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/plqAllNeg.txt plqAllNeg m 1> fisherAnalysis/results/group2/plqAllNegResult.out 2> fisherAnalysis/results/group2/plqAllNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/plqAllNeu.txt plqAllNeu m 1> fisherAnalysis/results/group2/plqAllNeuResult.out 2> fisherAnalysis/results/group2/plqAllNeuResult.err
+
+
+# topsix
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/plqTopSixPos.txt plqTopSixPos m 1> fisherAnalysis/results/group2/plqTopSixPosResult.out 2> fisherAnalysis/results/group2/plqTopSixPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/plqTopSixNeg.txt plqTopSixNeg m 1> fisherAnalysis/results/group2/plqTopSixNegResult.out 2> fisherAnalysis/results/group2/plqTopSixNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/plqTopSixNeu.txt plqTopSixNeu m 1> fisherAnalysis/results/group2/plqTopSixNeuResult.out 2> fisherAnalysis/results/group2/plqTopSixNeuResult.err
+
+
+
+# COA
+
+echo "coa results"
+# all
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/coaAllPos.txt coaAllPos m 1> fisherAnalysis/results/group2/coaAllPosResult.out 2> fisherAnalysis/results/group2/coaAllPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/coaAllNeg.txt coaAllNeg m 1> fisherAnalysis/results/group2/coaAllNegResult.out 2> fisherAnalysis/results/group2/coaAllNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/coaAllNeu.txt coaAllNeu m 1> fisherAnalysis/results/group2/coaAllNeuResult.out 2> fisherAnalysis/results/group2/coaAllNeuResult.err
+
+
+# topsix
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/coaTopSixPos.txt coaTopSixPos m 1> fisherAnalysis/results/group2/coaTopSixPosResult.out 2> fisherAnalysis/results/group2/coaTopSixPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/coaTopSixNeg.txt coaTopSixNeg m 1> fisherAnalysis/results/group2/coaTopSixNegResult.out 2> fisherAnalysis/results/group2/coaTopSixNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/coaTopSixNeu.txt coaTopSixNeu m 1> fisherAnalysis/results/group2/coaTopSixNeuResult.out 2> fisherAnalysis/results/group2/coaTopSixNeuResult.err
+
+
+
+# PLP
+
+echo "plp results"
+# all
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/plpAllPos.txt plpAllPos m 1> fisherAnalysis/results/group2/plpAllPosResult.out 2> fisherAnalysis/results/group2/plpAllPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/plpAllNeg.txt plpAllNeg m 1> fisherAnalysis/results/group2/plpAllNegResult.out 2> fisherAnalysis/results/group2/plpAllNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/plpAllNeu.txt plpAllNeu m 1> fisherAnalysis/results/group2/plpAllNeuResult.out 2> fisherAnalysis/results/group2/plpAllNeuResult.err
+
+
+# topsix
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/plpTopSixPos.txt plpTopSixPos m 1> fisherAnalysis/results/group2/plpTopSixPosResult.out 2> fisherAnalysis/results/group2/plpTopSixPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/plpTopSixNeg.txt plpTopSixNeg m 1> fisherAnalysis/results/group2/plpTopSixNegResult.out 2> fisherAnalysis/results/group2/plpTopSixNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/plpTopSixNeu.txt plpTopSixNeu m 1> fisherAnalysis/results/group2/plpTopSixNeuResult.out 2> fisherAnalysis/results/group2/plpTopSixNeuResult.err
+
+
+
+# TPP
+
+echo "tpp results"
+# all
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/tppAllPos.txt tppAllPos m 1> fisherAnalysis/results/group2/tppAllPosResult.out 2> fisherAnalysis/results/group2/tppAllPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/tppAllNeg.txt tppAllNeg m 1> fisherAnalysis/results/group2/tppAllNegResult.out 2> fisherAnalysis/results/group2/tppAllNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/tppAllNeu.txt tppAllNeu m 1> fisherAnalysis/results/group2/tppAllNeuResult.out 2> fisherAnalysis/results/group2/tppAllNeuResult.err
+
+
+# topsix
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/tppTopSixPos.txt tppTopSixPos m 1> fisherAnalysis/results/group2/tppTopSixPosResult.out 2> fisherAnalysis/results/group2/tppTopSixPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/tppTopSixNeg.txt tppTopSixNeg m 1> fisherAnalysis/results/group2/tppTopSixNegResult.out 2> fisherAnalysis/results/group2/tppTopSixNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/tppTopSixNeu.txt tppTopSixNeu m 1> fisherAnalysis/results/group2/tppTopSixNeuResult.out 2> fisherAnalysis/results/group2/tppTopSixNeuResult.err
+
+
+# UDP
+
+echo "udp results"
+# all
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/udpAllPos.txt udpAllPos m 1> fisherAnalysis/results/group2/udpAllPosResult.out 2> fisherAnalysis/results/group2/udpAllPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/udpAllNeg.txt udpAllNeg m 1> fisherAnalysis/results/group2/udpAllNegResult.out 2> fisherAnalysis/results/group2/udpAllNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/udpAllNeu.txt udpAllNeu m 1> fisherAnalysis/results/group2/udpAllNeuResult.out 2> fisherAnalysis/results/group2/udpAllNeuResult.err
+
+
+# topsix
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/udpTopSixPos.txt udpTopSixPos m 1> fisherAnalysis/results/group2/udpTopSixPosResult.out 2> fisherAnalysis/results/group2/udpTopSixPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/udpTopSixNeg.txt udpTopSixNeg m 1> fisherAnalysis/results/group2/udpTopSixNegResult.out 2> fisherAnalysis/results/group2/udpTopSixNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/udpTopSixNeu.txt udpTopSixNeu m 1> fisherAnalysis/results/group2/udpTopSixNeuResult.out 2> fisherAnalysis/results/group2/udpTopSixNeuResult.err
+
+
+
+# BTN
+
+echo "btn results"
+# all
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/btnAllPos.txt btnAllPos m 1> fisherAnalysis/results/group2/btnAllPosResult.out 2> fisherAnalysis/results/group2/btnAllPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/btnAllNeg.txt btnAllNeg m 1> fisherAnalysis/results/group2/btnAllNegResult.out 2> fisherAnalysis/results/group2/btnAllNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/btnAllNeu.txt btnAllNeu m 1> fisherAnalysis/results/group2/btnAllNeuResult.out 2> fisherAnalysis/results/group2/btnAllNeuResult.err
+
+
+# topsix
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/btnTopSixPos.txt btnTopSixPos m 1> fisherAnalysis/results/group2/btnTopSixPosResult.out 2> fisherAnalysis/results/group2/btnTopSixPosResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/btnTopSixNeg.txt btnTopSixNeg m 1> fisherAnalysis/results/group2/btnTopSixNegResult.out 2> fisherAnalysis/results/group2/btnTopSixNegResult.err
+time python3 fisherAnalysis/code/getResults.py fisherAnalysis/results/group2/btnTopSixNeu.txt btnTopSixNeu m 1> fisherAnalysis/results/group2/btnTopSixNeuResult.out 2> fisherAnalysis/results/group2/btnTopSixNeuResult.err
+
+echo "finished results!"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+########## Do the Fisher's test on each spreadsheet. ##########
+
+# b12
+
+echo "b12 all fisher"
+# all pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsB12All.xlsx fisherAnalysis/results/group2/b12AllPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsB12AllPos.out 2> fisherAnalysis/results/group2/statsB12AllPos.err
+
+# all neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsB12All.xlsx fisherAnalysis/results/group2/b12AllNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsB12AllNeg.out 2> fisherAnalysis/results/group2/statsB12AllNeg.err
+
+# all neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsB12All.xlsx fisherAnalysis/results/group2/b12AllNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsB12AllNeu.out 2> fisherAnalysis/results/group2/statsB12AllNeu.err
+
+
+
+
+echo "B12 topsix fisher"
+# TopSix pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsB12TopSix.xlsx fisherAnalysis/results/group2/b12TopSixPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsB12TopSixPos.out 2> fisherAnalysis/results/group2/statsB12TopSixPos.err
+
+# TopSix neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsB12TopSix.xlsx fisherAnalysis/results/group2/b12TopSixNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsB12TopSixNeg.out 2> fisherAnalysis/results/group2/statsB12TopSixNeg.err
+
+# TopSix neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsB12TopSix.xlsx fisherAnalysis/results/group2/b12TopSixNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsB12TopSixNeu.out 2> fisherAnalysis/results/group2/statsB12TopSixNeu.err
+
+
+
+
+
+
+# thg
+
+echo "thg all fisher"
+# all pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsTHGAll.xlsx fisherAnalysis/results/group2/thgAllPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsTHGAllPos.out 2> fisherAnalysis/results/group2/statsTHGAllPos.err
+
+# all neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsTHGAll.xlsx fisherAnalysis/results/group2/thgAllNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsTHGAllNeg.out 2> fisherAnalysis/results/group2/statsTHGAllNeg.err
+
+# all neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsTHGAll.xlsx fisherAnalysis/results/group2/thgAllNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsTHGAllNeu.out 2> fisherAnalysis/results/group2/statsTHGAllNeu.err
+
+
+
+
+echo "THG topsix fisher"
+# TopSix pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsTHGTopSix.xlsx fisherAnalysis/results/group2/thgTopSixPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsTHGTopSixPos.out 2> fisherAnalysis/results/group2/statsTHGTopSixPos.err
+
+# TopSix neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsTHGTopSix.xlsx fisherAnalysis/results/group2/thgTopSixNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsTHGTopSixNeg.out 2> fisherAnalysis/results/group2/statsTHGTopSixNeg.err
+
+# TopSix neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsTHGTopSix.xlsx fisherAnalysis/results/group2/thgTopSixNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsTHGTopSixNeu.out 2> fisherAnalysis/results/group2/statsTHGTopSixNeu.err
+
+
+
+
+
+
+# plq
+
+echo "plq all fisher"
+# all pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsPLQAll.xlsx fisherAnalysis/results/group2/plqAllPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsPLQAllPos.out 2> fisherAnalysis/results/group2/statsPLQAllPos.err
+
+# all neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsPLQAll.xlsx fisherAnalysis/results/group2/plqAllNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsPLQAllNeg.out 2> fisherAnalysis/results/group2/statsPLQAllNeg.err
+
+# all neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsPLQAll.xlsx fisherAnalysis/results/group2/plqAllNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsPLQAllNeu.out 2> fisherAnalysis/results/group2/statsPLQAllNeu.err
+
+
+
+
+echo "PLQ topsix fisher"
+# TopSix pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsPLQTopSix.xlsx fisherAnalysis/results/group2/plqTopSixPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsPLQTopSixPos.out 2> fisherAnalysis/results/group2/statsPLQTopSixPos.err
+
+# TopSix neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsPLQTopSix.xlsx fisherAnalysis/results/group2/plqTopSixNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsPLQTopSixNeg.out 2> fisherAnalysis/results/group2/statsPLQTopSixNeg.err
+
+# TopSix neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsPLQTopSix.xlsx fisherAnalysis/results/group2/plqTopSixNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsPLQTopSixNeu.out 2> fisherAnalysis/results/group2/statsPLQTopSixNeu.err
+
+
+
+
+
+# COA
+
+echo "coa all fisher"
+# all pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsCOAAll.xlsx fisherAnalysis/results/group2/coaAllPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsCOAAllPos.out 2> fisherAnalysis/results/group2/statsCOAAllPos.err
+
+# all neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsCOAAll.xlsx fisherAnalysis/results/group2/coaAllNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsCOAAllNeg.out 2> fisherAnalysis/results/group2/statsCOAAllNeg.err
+
+# all neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsCOAAll.xlsx fisherAnalysis/results/group2/coaAllNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsCOAAllNeu.out 2> fisherAnalysis/results/group2/statsCOAAllNeu.err
+
+
+
+
+echo "COA topsix fisher"
+# TopSix pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsCOATopSix.xlsx fisherAnalysis/results/group2/coaTopSixPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsCOATopSixPos.out 2> fisherAnalysis/results/group2/statsCOATopSixPos.err
+
+# TopSix neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsCOATopSix.xlsx fisherAnalysis/results/group2/coaTopSixNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsCOATopSixNeg.out 2> fisherAnalysis/results/group2/statsCOATopSixNeg.err
+
+# TopSix neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsCOATopSix.xlsx fisherAnalysis/results/group2/coaTopSixNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsCOATopSixNeu.out 2> fisherAnalysis/results/group2/statsCOATopSixNeu.err
+
+
+
+
+
+# PLP
+
+echo "PLP all fisher"
+# all pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsPLPAll.xlsx fisherAnalysis/results/group2/plpAllPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsPLPAllPos.out 2> fisherAnalysis/results/group2/statsPLPAllPos.err
+
+# all neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsPLPAll.xlsx fisherAnalysis/results/group2/plpAllNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsPLPAllNeg.out 2> fisherAnalysis/results/group2/statsPLPAllNeg.err
+
+# all neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsPLPAll.xlsx fisherAnalysis/results/group2/plpAllNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsPLPAllNeu.out 2> fisherAnalysis/results/group2/statsPLPAllNeu.err
+
+
+
+
+echo "PLP topsix fisher"
+# TopSix pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsPLPTopSix.xlsx fisherAnalysis/results/group2/plpTopSixPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsPLPTopSixPos.out 2> fisherAnalysis/results/group2/statsPLPTopSixPos.err
+
+# TopSix neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsPLPTopSix.xlsx fisherAnalysis/results/group2/plpTopSixNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsPLPTopSixNeg.out 2> fisherAnalysis/results/group2/statsPLPTopSixNeg.err
+
+# TopSix neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsPLPTopSix.xlsx fisherAnalysis/results/group2/plpTopSixNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsPLPTopSixNeu.out 2> fisherAnalysis/results/group2/statsPLPTopSixNeu.err
+
+
+
+
+# TPP
+
+echo "TPP all fisher"
+# all pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsTPPAll.xlsx fisherAnalysis/results/group2/tppAllPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsTPPAllPos.out 2> fisherAnalysis/results/group2/statsTPPAllPos.err
+
+# all neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsTPPAll.xlsx fisherAnalysis/results/group2/tppAllNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsTPPAllNeg.out 2> fisherAnalysis/results/group2/statsTPPAllNeg.err
+
+# all neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsTPPAll.xlsx fisherAnalysis/results/group2/tppAllNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsTPPAllNeu.out 2> fisherAnalysis/results/group2/statsTPPAllNeu.err
+
+
+
+
+echo "TPP topsix fisher"
+# TopSix pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsTPPTopSix.xlsx fisherAnalysis/results/group2/tppTopSixPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsTPPTopSixPos.out 2> fisherAnalysis/results/group2/statsTPPTopSixPos.err
+
+# TopSix neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsTPPTopSix.xlsx fisherAnalysis/results/group2/tppTopSixNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsTPPTopSixNeg.out 2> fisherAnalysis/results/group2/statsTPPTopSixNeg.err
+
+# TopSix neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsTPPTopSix.xlsx fisherAnalysis/results/group2/tppTopSixNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsTPPTopSixNeu.out 2> fisherAnalysis/results/group2/statsTPPTopSixNeu.err
+
+
+
+
+
+# BTN
+
+echo "BTN all fisher"
+# all pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsBTNAll.xlsx fisherAnalysis/results/group2/btnAllPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsBTNAllPos.out 2> fisherAnalysis/results/group2/statsBTNAllPos.err
+
+# all neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsBTNAll.xlsx fisherAnalysis/results/group2/btnAllNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsBTNAllNeg.out 2> fisherAnalysis/results/group2/statsBTNAllNeg.err
+
+# all neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsBTNAll.xlsx fisherAnalysis/results/group2/btnAllNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsBTNAllNeu.out 2> fisherAnalysis/results/group2/statsBTNAllNeu.err
+
+
+
+
+echo "BTN topsix fisher"
+# TopSix pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsBTNTopSix.xlsx fisherAnalysis/results/group2/btnTopSixPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsBTNTopSixPos.out 2> fisherAnalysis/results/group2/statsBTNTopSixPos.err
+
+# TopSix neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsBTNTopSix.xlsx fisherAnalysis/results/group2/btnTopSixNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsBTNTopSixNeg.out 2> fisherAnalysis/results/group2/statsBTNTopSixNeg.err
+
+# TopSix neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsBTNTopSix.xlsx fisherAnalysis/results/group2/btnTopSixNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsBTNTopSixNeu.out 2> fisherAnalysis/results/group2/statsBTNTopSixNeu.err
+
+
+
+
+
+# UDP
+
+echo "UDP all fisher"
+# all pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsUDPAll.xlsx fisherAnalysis/results/group2/udpAllPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsUDPAllPos.out 2> fisherAnalysis/results/group2/statsUDPAllPos.err
+
+# all neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsUDPAll.xlsx fisherAnalysis/results/group2/udpAllNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsUDPAllNeg.out 2> fisherAnalysis/results/group2/statsUDPAllNeg.err
+
+# all neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsUDPAll.xlsx fisherAnalysis/results/group2/udpAllNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsUDPAllNeu.out 2> fisherAnalysis/results/group2/statsUDPAllNeu.err
+
+
+
+
+echo "UDP topsix fisher"
+# TopSix pos
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsUDPTopSix.xlsx fisherAnalysis/results/group2/udpTopSixPos.xlsx 3.5 1> fisherAnalysis/results/group2/statsUDPTopSixPos.out 2> fisherAnalysis/results/group2/statsUDPTopSixPos.err
+
+# TopSix neg
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsUDPTopSix.xlsx fisherAnalysis/results/group2/udpTopSixNeg.xlsx 3.5 1> fisherAnalysis/results/group2/statsUDPTopSixNeg.out 2> fisherAnalysis/results/group2/statsUDPTopSixNeg.err
+
+# TopSix neu
+time python3 fisherAnalysis/code/groupFisher.py fisherAnalysis/results/aggAttempt3/hasMetalsUDPTopSix.xlsx fisherAnalysis/results/group2/udpTopSixNeu.xlsx 3.5 1> fisherAnalysis/results/group2/statsUDPTopSixNeu.out 2> fisherAnalysis/results/group2/statsUDPTopSixNeu.err
+
+
+
+echo "finished completeGroupAnalysis!"
